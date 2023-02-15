@@ -1,0 +1,17 @@
+{
+    "name": "javierborjas/bienes-raices-poo_php_inicio",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "javier-tecla",
+            "email": "cristman11@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4":{
+            "App\\" : "./classes"
+        }
+    }
+}

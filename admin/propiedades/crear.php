@@ -1,15 +1,13 @@
 <?php
     
-    require '../../includes/funciones.php';
-    $auth = estaAutenticado();
+    require '../../includes/app.php';
 
+    use App\Propiedad;
 
-    if(!$auth) {
-        header('Location: /');
-    }
-    
-    // Base de datos
-    require '../../includes/config/database.php';
+  
+   estaAutenticado();
+
+       
     $db = conectarDB();
 
     // Consultar para obtener los vendedores
@@ -30,14 +28,18 @@
 
     // Ejecutar el codigo despues de que el usuario envia el formulario 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $propiedad = new Propiedad($_POST);
+
+        $propiedad->guardar();
        
         // echo "<pre>";
         // var_dump($_POST);
         // echo "</pre>";
 
-        // echo "<pre>";
-        //var_dump($_FILES);
-        // echo "</pre>";
+        echo "<pre>";
+        var_dump($_FILES);
+        echo "</pre>";
 
         
         $titulo = mysqli_real_escape_string( $db, $_POST['titulo'] );
@@ -45,7 +47,7 @@
         $descripcion = mysqli_real_escape_string( $db, $_POST['descripcion'] );
         $habitaciones = mysqli_real_escape_string( $db, $_POST['habitaciones'] );
         $wc = mysqli_real_escape_string( $db, $_POST['wc'] );
-        $estacionamiento = mysqli_real_escape_string( $db, $_POST['estacionamiento']);
+        $estacionamiento = mysqli_real_escape_string( $db, $_POST['estacionamiento'] );
         $vendedorId = mysqli_real_escape_string( $db, $_POST['vendedor'] );
         $creado = date('Y/m/d');
 
@@ -121,8 +123,7 @@
             
 
 
-            // Insertar en la base de datos
-            $query = " INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId ) VALUES ( '$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId' ) ";
+            
 
             // echo $query;
 
@@ -210,7 +211,7 @@
             <fieldset>
                 <legend>Vendedor</legend>
 
-                <select name="vendedor">
+                <select name="vendedorId">
                     <option value="">-- Seleccione --</option>
                     <?php while($vendedor = mysqli_fetch_assoc($resultado) ): ?>
                         <option <?php echo $vendedorId === $vendedor['id'] ? 'selected' : ''; ?>  value="<?php echo $vendedor['id']; ?>"> <?php echo $vendedor['nombre'] . " " . $vendedor['apellido']; ?> </option>

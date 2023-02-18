@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errores)) {
 
 
+
         // Creae la carpeta para subir imagenes   
         if (!is_dir(CARPETA_IMAGENES)) {
             mkdir(CARPETA_IMAGENES);
@@ -53,13 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image->save(CARPETA_IMAGENES . $nombreImagen);
 
         // Guarda en la base de datos
-        $resultado = $propiedad->guardar();
-
-        // Mensaje de exito
-        if ($resultado) {
-            // Redireccionar al usuario.
-            header('Location: /admin?resultado=1');
-        }
+        $propiedad->guardar();
     }
 }
 

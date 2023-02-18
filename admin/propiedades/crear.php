@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     /**Crea una nueva instancia */
     $propiedad = new Propiedad($_POST['propiedad']);
-    
+
     /** SUBIDA DE ARCHIVOS */
 
     // Generar un nombre único

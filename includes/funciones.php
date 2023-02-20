@@ -27,8 +27,15 @@ function debuguear($variable)
 }
 
 // Escapa / Sanitizar el HTML
-function s($html): string
+function s($html) : string
 {
       $s = htmlspecialchars($html);
       return $s;
+}
+
+// Validar tipo de Contenido
+function validarTipoContenido($tipo) {
+      $tipos = ['vendedor', 'propiedad'];
+
+      return in_array($tipo, $tipos);
 }

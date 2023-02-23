@@ -60,7 +60,7 @@ class ActiveRecord
         $resultado = self::$db->query($query);
 
         // Mensaje de exito
-        if ($resultado) {
+        if($resultado) {
             // Redireccionar al usuario.
             header('Location: /admin?resultado=1');
         }
@@ -176,7 +176,7 @@ class ActiveRecord
 
         $resultado = self::consultarSQL($query);
 
-        return  array_shift($resultado);
+        return  array_shift( $resultado ) ;
     }
 
     public static function consultarSQL($query)
@@ -212,7 +212,7 @@ class ActiveRecord
 
 
     // Sincroniza el objeto en memoria con los cambios realizado por el usuario
-    public function sincronizar($args = [])
+    public function sincronizar($args = [] )
     {
         foreach ($args as $key => $value) {
             if (property_exists($this, $key) && !is_null($value)) {

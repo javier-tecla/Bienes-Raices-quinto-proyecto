@@ -15,8 +15,6 @@ if(!$id) {
 // Obtener el arreglo del vendedor
 $vendedor = Vendedor::find($id);
 
- debuguear($vendedor);
-
 
 // Arreglo con mensajes de errores
 $errores = Vendedor::getErrores();
@@ -26,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  // Asignar los valores
  $args = $_POST['vendedor'];
 
+ 
  // Sincronizar objeto en memoria con lo que el usuario escribio
  $vendedor->sincronizar($args);
 
